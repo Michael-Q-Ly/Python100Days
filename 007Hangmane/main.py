@@ -7,45 +7,60 @@ import random
 
 word_list = ["aardvark", "baboon", "camel"]
 
+# Select a word
 chosen_word = random.choice(word_list)
 print(chosen_word)
 
-"""
-
-# TODO-1: Create a "placeholder" with the same number of blanks as letters
-blank_list = []
-for i in range(len(chosen_word)):
-    blank_list.append('_')
-print(*blank_list, sep='')
-
-guess = input("Input a letter: ").lower()
-
-# TODO-2: Create a "display" that puts the guess letter in the correct position
-# in the blanks
-
-for i in range(len(chosen_word)):
-    if guess == chosen_word[i]:
-        blank_list[i] = guess
-        print(*blank_list, sep='')
-"""
-
-# TODO-1: Create a "placeholder" with the same number of blanks as letters
+# Set the blank spaces for the user  to fill in
 placeholder = ''
 for position in range(len(chosen_word)):
     placeholder += '_'
 print(placeholder)
 
-guess = input("Input a letter: ").lower()
+# TODO-1: Use a while loop to let the user guess again
 
-# TODO-2: Create a "display" that puts the guess letter in the correct position
-# in the blanks
+"""
+Solution 1:
+"""
+# display = []
+# while ''.join(display) != chosen_word:
+#     guess = input("Input a letter: ").lower()
+#
+#     # TODO-2: Change the for loop so that you keep the previous correct letters
+#     if len(display) != len(chosen_word):
+#         for letter in chosen_word:
+#             if guess == letter:
+#                 display.append(guess)
+#             else:
+#                 display.append('_')
+#     else:
+#         for i in range(0, len(chosen_word)):
+#             if guess == chosen_word[i]:
+#                 display[i] = guess
+#     print(''.join(display))
 
-display = ''
-position = 0
-for letter in chosen_word:
-    if guess == letter:
-        display += letter
-    else:
-        display += '_'
+"""
+Solution 2:
+"""
+game_over = False
+correct_letters = []
 
-print(display)
+while not game_over:
+    guess = input("Guess a letter: ").lower()
+
+    display = ""
+
+    for letter in chosen_word:
+        if guess == letter:
+            display += letter
+            correct_letters.append(guess)
+        elif letter in correct_letters:
+            display += letter
+        else:
+            display += '_'
+
+    print(display)
+
+    if '_' not in display:
+        game_over = True
+        print("You win!")
