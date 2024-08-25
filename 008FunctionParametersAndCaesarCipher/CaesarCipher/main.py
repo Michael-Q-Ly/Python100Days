@@ -2,58 +2,48 @@
 Caesar Cipher
 """
 
-
-alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
-            'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x',
-            'y', 'z']
-
-direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n").lower()
-text = input("Type your message:\n").lower()
-shift = int(input("Type the shift number:\n"))
+# TODO-1: Import and print the logo from art.py when the program starts.
+from art import logo
 
 
-def encrypt(original_text, shift_amount):
-    """
-    Shift origininal text forward by user-specified amount
-    """
-    cipher_text = ""
-    for letter in original_text:
-        shifted_position = alphabet.index(letter) + shift_amount
-        shifted_position %= len(alphabet)
-        cipher_text += alphabet[shifted_position]
-    print(f"Here is the encoded result: {cipher_text}")
+alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+
+# TODO-2: What happens if the user enters a number/symbol/space?
 
 
-def decrypt(original_text, shift_amount):
-    """
-    Shift origininal text backward by user-specified amount
-    """
-    cipher_text = ""
-    for letter in original_text:
-        shifted_position = alphabet.index(letter) - shift_amount
-        shifted_position %= len(alphabet)
-        cipher_text += alphabet[shifted_position]
-    print(f"Here is the decoded result: {cipher_text}")
+def caesar(original_text, shift_amount, encode_or_decode):
+    output_text = ""
 
-
-def caesar(encode_or_decode, original_text, shift_amount):
-    """
-    Combine encrypt and decrypt functions into one
-    """
-    cipher_text = ""
-    if encode_or_decode.lower() == "encode":
-        shift_amount *= 1
-    elif encode_or_decode == "decode":
+    if encode_or_decode == "decode":
         shift_amount *= -1
-    else:
-        print("Invalid choice!")
-        exit()
     for letter in original_text:
+        if not letter.isalpha():
+            output_text += letter
+            continue
+
         shifted_position = alphabet.index(letter) + shift_amount
         shifted_position %= len(alphabet)
-        cipher_text += alphabet[shifted_position]
-    print(f"Here is the {encode_or_decode}d result: {cipher_text}")
+        output_text += alphabet[shifted_position]
+    print(f"Here is the {encode_or_decode}d result: {output_text}")
 
 
-if __name__ == "__main__":
-    caesar(direction, text, shift)
+# TODO-3: Can you figure out a way to restart the cipher program?
+
+repeat = True
+while repeat:
+    print(logo)
+    direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n").lower()
+    text = input("Type your message:\n").lower()
+    try:
+        shift = int(input("Type the shift number:\n"))
+    except ValueError:
+        print("Shift amount must be an integer! Try again.")
+        continue
+
+    caesar(original_text=text, shift_amount=shift, encode_or_decode=direction)
+
+    repeat_program = input("Would you like to run the program again? (Y/n) ").lower()
+    if repeat_program == "y" or repeat_program == "yes":
+        repeat = True
+    else:
+        repeat = False
