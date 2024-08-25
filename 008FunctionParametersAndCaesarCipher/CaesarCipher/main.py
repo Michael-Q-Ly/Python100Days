@@ -3,35 +3,57 @@ Caesar Cipher
 """
 
 
-alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
-            'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
-            'v', 'w', 'x', 'y', 'z']
+alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
+            'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x',
+            'y', 'z']
 
 direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n").lower()
 text = input("Type your message:\n").lower()
 shift = int(input("Type the shift number:\n"))
 
 
-# TODO-1: Create a function called 'encrypt()' that takes 'original_text' and 'shift_amount' as 2 inputs.
 def encrypt(original_text, shift_amount):
-
-# TODO-2: Inside the 'encrypt()' function, shift each letter of the 'original_text' forwards in the alphabet
-#  by the shift amount and print the encrypted text.
-    encoded_text = ''
+    """
+    Shift origininal text forward by user-specified amount
+    """
+    cipher_text = ""
     for letter in original_text:
-        # Use modulo 26 to always stay between indices 0 and 25
-        shifted_position = (alphabet.index(letter) + shift_amount) % len(alphabet)
-        encoded_text += alphabet[shifted_position]
-    print(encoded_text)
+        shifted_position = alphabet.index(letter) + shift_amount
+        shifted_position %= len(alphabet)
+        cipher_text += alphabet[shifted_position]
+    print(f"Here is the encoded result: {cipher_text}")
 
-# TODO-4: What happens if you try to shift z forwards by 9? Can you fix the code?
 
-# TODO-3: Call the 'encrypt()' function and pass in the user inputs. You should be able to test the code and encrypt a
-#  message.
-if __name__ == "__main__":
-    if direction.lower() == "encode":
-        encrypt(text, shift)
-    elif direction.lower() == "decode":
-        print("hi")
+def decrypt(original_text, shift_amount):
+    """
+    Shift origininal text backward by user-specified amount
+    """
+    cipher_text = ""
+    for letter in original_text:
+        shifted_position = alphabet.index(letter) - shift_amount
+        shifted_position %= len(alphabet)
+        cipher_text += alphabet[shifted_position]
+    print(f"Here is the decoded result: {cipher_text}")
+
+
+def caesar(encode_or_decode, original_text, shift_amount):
+    """
+    Combine encrypt and decrypt functions into one
+    """
+    cipher_text = ""
+    if encode_or_decode.lower() == "encode":
+        shift_amount *= 1
+    elif encode_or_decode == "decode":
+        shift_amount *= -1
     else:
-        print("not a valid choice")
+        print("Invalid choice!")
+        exit()
+    for letter in original_text:
+        shifted_position = alphabet.index(letter) + shift_amount
+        shifted_position %= len(alphabet)
+        cipher_text += alphabet[shifted_position]
+    print(f"Here is the {encode_or_decode}d result: {cipher_text}")
+
+
+if __name__ == "__main__":
+    caesar(direction, text, shift)
