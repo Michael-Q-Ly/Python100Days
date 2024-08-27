@@ -15,6 +15,7 @@ Blind Auction Challenge
 
 from art import logo
 
+
 def print_logo():
     print(logo)
 
@@ -59,4 +60,3 @@ if __name__ == "__main__":
                 print(f"The winner is {winner[0]} with a bid of ${winner[1]}")
             else:
                 print("Please refrain from sudden outbursts.")
-
