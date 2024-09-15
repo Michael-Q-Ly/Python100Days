@@ -40,7 +40,6 @@ Warning
 Your return should be a boolean and match the Example Output format exactly,
 including spelling and punctuation.
 
-
 Example Input 1
 2400
 
@@ -54,3 +53,55 @@ Example Input 2
 Example Return 2
 False
 """
+
+
+def not_leap_year(year):
+    print(f"{year} is not a leap year.")
+
+
+def check_divisible_by_4(year):
+    if year % 4 == 0:
+        return True
+    else:
+        return False
+
+
+def check_divisible_by_100(year):
+    if year % 100 == 0:
+        return True
+    else:
+        return False
+
+
+def check_divisible_by_400(year):
+    if year % 400 == 0:
+        return True
+    else:
+        return False
+
+is_leap_year = False
+
+year = int(input("Please put in a year to see if it is a leap year. "))
+
+is_divisible_by_400 = check_divisible_by_400(year)
+is_divisible_by_100 = check_divisible_by_100(year)
+is_divisible_by_4 = check_divisible_by_4(year)
+
+if year >= 100:
+    if is_divisible_by_4:
+        is_leap_year = True
+    if is_divisible_by_100:
+        if is_divisible_by_400:
+            is_leap_year = True
+        else:
+            is_leap_year = False
+else:
+    if is_divisible_by_4:
+        is_leap_year = True
+    else:
+        is_leap_year = False
+
+if is_leap_year:
+    print(f"{year} is a leap year.")
+else:
+    print(f"{year} is not a leap year.")
