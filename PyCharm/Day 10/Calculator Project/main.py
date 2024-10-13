@@ -18,10 +18,11 @@ def divide(n1, n2):
     return n1 / n2
 
 
-# TODO: Make a dictionary for these four values. Keys are +, -, *, and /
 operations = {
     '+': add,
     '-': subtract,
     '*': multiply,
     '/': divide,
 }
+
+print(operations['+'](2,3))
