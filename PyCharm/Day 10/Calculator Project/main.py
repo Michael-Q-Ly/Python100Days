@@ -6,6 +6,8 @@ Allows the user to use previous result for additional operations or to start
 over from scratch.
 """
 
+import art
+
 
 def add(n1, n2):
     """Adds two numbers together"""
@@ -27,8 +29,10 @@ def divide(n1, n2):
     return n1 / n2
 
 
-if __name__ == '__main__':
+def main():
     """Calculator program"""
+
+    print(art.logo)
 
     operations = {
         "+": add,
@@ -65,3 +69,7 @@ if __name__ == '__main__':
             continue
         else:
             print("You must enter 'y' or 'n'")
+
+
+if __name__ == '__main__':
+    main()
