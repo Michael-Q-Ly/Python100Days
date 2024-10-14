@@ -1,12 +1,10 @@
 """
-#!/usr/bin/env python
+#!/user/bin/env python
 Calculator
 Performs addition, subtraction, multiplication, and division.
 Allows the user to use previous result for additional operations or to start
 over from scratch.
 """
-
-import art
 
 
 def add(n1, n2):
@@ -32,8 +30,6 @@ def divide(n1, n2):
 def main():
     """Calculator program"""
 
-    print(art.logo)
-
     operations = {
         "+": add,
         "-": subtract,
@@ -41,7 +37,6 @@ def main():
         "/": divide,
     }
 
-    request_continuation = False
     result = None
     use_previous_result = False
     while True:
@@ -61,10 +56,10 @@ def main():
                                      "result as your first number ("
                                      "y/N)? ").lower()
 
-        if request_continuation == 'y' or request_continuation == 'yes':
+        if request_continuation in ('y', 'yes'):
             use_previous_result = True
             num1 = result
-        elif request_continuation == 'n' or request_continuation == 'no':
+        elif request_continuation in ('n', 'no'):
             use_previous_result = False
             continue
         else:
