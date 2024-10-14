@@ -1,5 +1,5 @@
 """
-#!/usr/bin/env python
+#!/user/bin/env python
 Calculator
 Performs addition, subtraction, multiplication, and division.
 Allows the user to use previous result for additional operations or to start
@@ -27,7 +27,7 @@ def divide(n1, n2):
     return n1 / n2
 
 
-if __name__ == '__main__':
+def main():
     """Calculator program"""
 
     operations = {
@@ -37,7 +37,6 @@ if __name__ == '__main__':
         "/": divide,
     }
 
-    request_continuation = False
     result = None
     use_previous_result = False
     while True:
@@ -57,11 +56,15 @@ if __name__ == '__main__':
                                      "result as your first number ("
                                      "y/N)? ").lower()
 
-        if request_continuation == 'y' or request_continuation == 'yes':
+        if request_continuation in ('y', 'yes'):
             use_previous_result = True
             num1 = result
-        elif request_continuation == 'n' or request_continuation == 'no':
+        elif request_continuation in ('n', 'no'):
             use_previous_result = False
             continue
         else:
             print("You must enter 'y' or 'n'")
+
+
+if __name__ == '__main__':
+    main()
